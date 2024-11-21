@@ -21,8 +21,9 @@ export default function Btn(props: {command: string, backgroundColor: any, icone
                 Vibration.vibrate(160, false);
                 setClicked(true);
             }
-        } catch (error) {
-            ToastAndroid.show(`Dispositivo desconectado D:`, ToastAndroid.SHORT);
+        } catch (e: any) {
+            const errorMessage = e.message || String(e);
+            ToastAndroid.show(errorMessage, ToastAndroid.SHORT);
         }
     }
 
