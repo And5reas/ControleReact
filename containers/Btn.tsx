@@ -12,11 +12,7 @@ export default function Btn(props: {command: string, backgroundColor: any, icone
             const request = await fetch(`http://${await getIp()}/?comando=${props.command}`, {
                 method: 'POST',
             });
-
-            if (props.command == "L" || props.command == "X") {
-                Vibration.vibrate(160, false);
-                setClicked(click => !click);
-            } else
+            
             if (request.ok) {
                 Vibration.vibrate(160, false);
                 setClicked(true);
@@ -28,12 +24,7 @@ export default function Btn(props: {command: string, backgroundColor: any, icone
     }
 
     async function handlePressOut() {
-        if (props.command == "L" || props.command == "X") {
-            // pass
-            return;
-        }
-
-        const request = await fetch(`http://${await getIp()}/?comando=${props.command}`, {
+        const request = await fetch(`http://${await getIp()}/?comando=I`, {
             method: 'POST',
         });
 
