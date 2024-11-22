@@ -8,24 +8,24 @@ export default function Btn(props: {command: string, backgroundColor: any, icone
     const [clicked, setClicked] = useState(false);
     
     async function handlePressIn() {
-        try{
-            const request = await fetch(`http://${await getIp()}/?comando=${props.command}`, {
-                method: 'POST',
-            });
-            
-            if (request.ok) {
-                Vibration.vibrate(160, false);
-                setClicked(true);
-            }
-        } catch (e: any) {
-            const errorMessage = e.message || String(e);
-            ToastAndroid.show(errorMessage, ToastAndroid.SHORT);
+        const request = await fetch(`http://${await getIp()}/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `comando=${props.command}`
+        });
+
+        
+        if (request.ok) {
+            Vibration.vibrate(160, false);
+            setClicked(true);
         }
     }
 
     async function handlePressOut() {
-        const request = await fetch(`http://${await getIp()}/?comando=I`, {
+        const request = await fetch(`http://${await getIp()}/`, {
             method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'comando=I',
         });
 
         if (request.ok) {
